@@ -6,9 +6,40 @@ describe UsersController do
   def mock_user(stubs={})
     @mock_user ||= mock_model(User, stubs)
   end
+  
+  describe "GET confirm" do
+    before do
+      @user = Factory.create :user, :email => "user@domain.com"
+    end
+    describe "with valid token" do
+      before do
+        @user.email_confirmed?.should == false
+        get :confirm, :id => @user.id, :token => @user.perishable_token
+      end
+      it "confirms the user's email address" do
+        @user.reload.email_confirmed?.should == true
+      end
+      it "clears the perishable token" do
+        @user.reload.perishable_token.should be_nil
+      end
+    end
+    describe "with invalid token" do
+      before do
+        @user.email_confirmed?.should == false
+        get :confirm, :id => @user.id, :token => "badtoken"
+      end
+      it "does not confirm the user's email address" do
+        @user.reload.email_confirmed?.should == false
+      end
+      it "does not clear the user's valid perishable token" do
+        @user.reload.perishable_token.should_not be_nil
+      end
+    end
+  end
 
   describe "GET show" do
     it "assigns the requested user as @user" do
+      fake_login(Factory.create :user)
       User.stub!(:find).with("37").and_return(mock_user)
       get :show, :id => "37"
       assigns[:user].should equal(mock_user)

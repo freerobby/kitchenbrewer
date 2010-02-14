@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :users, :only => [:new, :create, :show, :edit, :update]
+  map.resources :users, :only => [:new, :create, :show, :edit, :update], :member => {:confirm => :get}
   map.resource :user_session
   
   map.login '/login', :controller => :user_sessions, :action => :new

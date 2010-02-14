@@ -31,3 +31,5 @@ config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http:/
 config.gem "rspec", :lib => false, :source => "http://gemcutter.org"
 config.gem "rspec-rails", :lib => false, :source => "http://gemcutter.org"
 # config.gem "thoughtbot-shoulda", :lib => "shoulda", :source => "http://gems.github.com"
+
+config.action_mailer.default_url_options = { :host => "test.host" }

@@ -20,6 +20,11 @@ Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
+  
+end
+
+def fake_login(user)
+  controller.stub!(:current_profile_session).and_return(UserSession.create(user))
 end
 
 def login(user)

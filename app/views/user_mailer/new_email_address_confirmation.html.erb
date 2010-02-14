@@ -1,0 +1,10 @@
+<%
+  confirmation_url = confirm_user_url(:id => @user.id, :token => @user.perishable_token)
+%>
+Hi <%= @user.nickname %>,
+
+Please confirm your new email address by clicking the link below.
+<%= confirmation_url %>
+
+Cheers,
+the KitchenBrewer team
