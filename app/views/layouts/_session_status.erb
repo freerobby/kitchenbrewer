@@ -1,0 +1,7 @@
+<p id="top">
+  <% if current_user %>
+    Hi there, <%= link_to current_user.email, user_path(current_user) %>
+  <% else %>
+    You are not logged in.
+  <% end %>
+</p>

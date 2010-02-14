@@ -1,17 +1,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<%= stylesheet_link_tag 'main' %>
+	<%= stylesheet_link_tag 'kitchenbrewer' %>
 	<%= javascript_include_tag :defaults %>
 	<title>Kitchen Brewer!</title>
 </head>
 <body>
-	<div class="wrap">
-	  <p style="color: green">
+	<div id="content">	  
+    <%= render :partial => "layouts/session_status" %>
+	  
+	  <div id="logo">
+			<h1><a href="/">KitchenBrewer</a></h1>
+		</div>
+	  
+	  <%= render :partial => "layouts/top_navigation" %>
+		
+    <div class="line"></div>
+		
+		<p style="color: green">
 	    <%= flash[:notice] %>
 	  </p>
     <%= yield %>
+		
+		<div id="footer">
+			<p>
+			  &copy; Copyright 2010 Digital Sublimity, Inc. |
+			  Developed by <a href="http://freerobby.com">Robby Grossman</a> |
+			  Design based on the work of <a href="http://www.solucija.com">Luka Cvrk</a>
+			</p>
+		</div>
 	</div>
 </body>
 </html>
