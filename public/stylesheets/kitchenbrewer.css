@@ -34,7 +34,7 @@ h2 {
 }
 h3 {
   font-size: 1.2em;
-  background: #B00A0A url(../images/redbg.gif) repeat-x left bottom;
+  background: #B00A0A;
   padding: 6px 7px;
   color: #fff;
   font-weight: normal;
@@ -68,17 +68,21 @@ p {
   background: url(http://fittipdaily.files.wordpress.com/2008/06/beer.jpg) no-repeat right top;
   padding: 0 350px 0 0;
   border-bottom: 1px solid #ddd;
-  height: 180px;
+  height: 210px;
   margin-top: 35px;
   margin-bottom: 35px;
 }
 	#pitch h1 {
 	  font-size: 2.6em;
 	  color: #000;
-	  margin: 0 0 20px;
+	  margin: 0 0 10px;
 	}
-	#pitch h2 {
-	  line-height: 1.5em;
+	#pitch p {
+	  line-height: 1.3em;
+	  padding-bottom: 12px;
+	  font-size: 1.2em;
+	  font-weight: normal;
+	  width: 500px;
 	}
 
 #menu {
@@ -98,13 +102,23 @@ p {
 		#menu li a {
 		  color: #a0a0a0;
 		  padding-top: 5px;
-		  
 		}
 		#menu li a:hover, #menu li a:focus {
 		  color: #000;
 		  border-bottom: 1px solid #ddd;
 		}
 
+/* Customized Forms */
+.welcome_submit {
+  color: #fff;
+  background: #b20f0f;
+  width: 160px;
+  height: 40px;
+  font-size: 1.2em;
+}
+.welcome_password {
+  
+}
 
 #content {
   width: 970px;

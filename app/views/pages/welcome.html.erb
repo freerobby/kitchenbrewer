@@ -2,11 +2,35 @@
 	<h1>
 	  Homebrewing meets social media
 	</h1>
-	<h2>
+	<p>
 	  KitchenBrewer is a resource for homebrewers. It integrates with social networks like Twitter and Facebook to help connect you with other brewers.
-	</h2>
+	</p>
+  <% unless current_user %>
+    <% form_for(User.new) do |f| %>
+      <%= f.error_messages %>
+      <table style="border: 3px solid #A55; padding: 17px">
+        <tr>
+          <td>
+            <%= f.label "Email:" %>
+            <%= f.text_field :email, :size => 45, :style => "float: right;" %>
+            <br />
+            <div style="float: left;">
+              <%= f.label "Password:" %>
+              <%= f.password_field :password, :size => 10 %>
+            </div>
+            <div style="float: right;">
+              <%= f.label "and again:" %>
+              <%= f.password_field :password_confirmation, :size => 10%>
+            </div>
+          </td>
+          <td>
+            <%= f.submit "1-click Sign Up!", :class => "welcome_submit" %>
+          </td>
+        </tr>
+      </table>
+    <% end %>
+  <% end %>
 </div>
-
 <div class="third">
 	<h3>Log Your Progress</h3>
 	<p>
