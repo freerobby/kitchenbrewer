@@ -54,6 +54,14 @@ p {
   margin: 0 0 15px;
 }
 
+#top {
+  color: #ccc;
+  padding: 6px 20px 0;
+  font-size: .94em;
+  text-align: right;
+  height: 10px;
+}
+
 .line {
   clear: both;
   border-bottom: 1px solid #ddd;
@@ -87,14 +95,14 @@ p {
 
 #menu {
   float: right;
-  margin: 3px 20px 0;
+  margin: 10px 20px 0 10px;
 }
 	#menu li {
 	  float: left;
 	  color: #000000;
 	  display: inline;
 	  font-size: 1.3em;
-	  margin-top: 0px;
+	  margin-top: 10px;
 	  margin-bottom: 0px;
 	  margin-right: 0px;
 	  margin-left: 55px;
@@ -123,7 +131,6 @@ p {
 #content {
   width: 970px;
   margin: 0 auto; }
-	#top { color: #ccc; padding: 6px 20px 0; font-size: .84em; text-align: right; }
 	#logo { float: left; background: url(../images/redbg.gif) repeat-x; padding: 100px 25px 15px; margin: -96px 0 20px; }
 		#logo h1 { text-shadow: 1px 1px 1px #7E0E0E; }
 

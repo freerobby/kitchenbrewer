@@ -1,7 +1,18 @@
-<p id="top">
+<div id="top">
   <% if current_user %>
-    Hi there, <%= link_to current_user.email, edit_user_path(current_user) %>
+    Hi there, <%= link_to current_user.email, edit_user_path(current_user) %> | <%= link_to "Logout", logout_path %>
   <% else %>
-    You are not logged in.
+    <!-- You are not logged in. | -->
+    
+    <% form_for UserSession.new, :url => user_session_path do |f| %>
+      <%= f.error_messages %>
+      <%= f.label "Email:" %>
+      <%= f.text_field :email, :size => 25 %>
+      <%= f.label "Password" %>
+      <%= f.password_field :password, :size => 10 %>
+      <%= f.submit "Login" %>
+      <!-- <%= f.check_box :remember_me %><%= f.label "Remember me" %> -->
+      
+    <% end %>
   <% end %>
-</p>
+</div>

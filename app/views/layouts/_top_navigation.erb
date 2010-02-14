@@ -1,14 +1,6 @@
 <ul id="menu">
   
-  <li><%= link_to_unless_current "Welcome", welcome_path %></li>
-	<li><%= link_to_unless_current "Sign Up!", signup_path %></li>
+  <li><%= link_to_unless_current "Welcome", '/' %></li>
   <li><a href="#">Journal</a></li>
 	<li><a href="#">Recipes</a></li>
-	<li>
-	  <% if current_user %>
-	    <%= link_to "Logout", logout_path %>
-	  <% else %>
-	    <%= link_to "Sign in", login_path %>
-	  <% end %>
-	</li>
 </ul>
