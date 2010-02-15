@@ -8,7 +8,9 @@
   </p>
   <div style="float: left; margin-bottom: 15px;">
     <%= f.label "Gravity reading:" %>
-    <%= f.text_field :gravity, :size => 5 %>
+    <%= f.text_field :gravity, :size => 5 %><br />
+    <%= f.label "Entry date:" %>
+    <%= calendar_date_select_tag "brewnote[recorded_at]", Time.now.to_s, :time => true, :size => 35 %>
   </div>
   <div style="float: right; margin-bottom: 15px;">
     <%= f.submit "Create Note!", :class=>"big_red_button" %>
