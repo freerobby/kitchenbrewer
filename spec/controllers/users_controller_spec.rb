@@ -3,10 +3,6 @@ require 'spec_helper'
 describe UsersController do
   setup :activate_authlogic
   
-  def mock_user(stubs={})
-    @mock_user ||= mock_model(User, stubs)
-  end
-  
   describe "GET confirm" do
     before do
       @user = Factory.create :user, :email => "user@domain.com"
@@ -38,56 +34,60 @@ describe UsersController do
   end
 
   describe "GET show" do
+    before do
+      @user1 = Factory.create :user
+      @user2 = Factory.create :user
+      login(@user1)
+    end
     it "assigns the requested user as @user" do
-      fake_login(Factory.create :user)
-      User.stub!(:find).with("37").and_return(mock_user)
-      get :show, :id => "37"
-      assigns[:user].should equal(mock_user)
+      get :show, :id => @user2.id
+      assigns[:user].should == @user2
     end
   end
 
   describe "GET new" do
     it "assigns a new user as @user" do
-      User.stub!(:new).and_return(mock_user)
       get :new
-      assigns[:user].should equal(mock_user)
+      assigns[:user].should_not be_nil
     end
   end
   
   describe "GET edit" do
+    before do
+      @user = Factory.create :user
+      login(@user)
+    end
     it "assigns the requested user as @user" do
-      User.stub!(:find).with("37").and_return(mock_user)
-      get :edit, :id => "37"
-      assigns[:user].should equal(mock_user)
+      get :edit, :id => @user.id
+      assigns[:user].should == @user
     end
   end
 
   describe "POST create" do
   
     describe "with valid params" do
-      it "assigns a newly created user as @user" do
-        User.stub!(:new).with({'these' => 'params'}).and_return(mock_user(:save => true))
-        post :create, :user => {:these => 'params'}
-        assigns[:user].should equal(mock_user)
+      before do
+        params = Factory.attributes_for :user
+        post :create, :user => params
       end
-  
+      it "assigns a newly created user as @user" do
+        assigns[:user].should be_valid
+      end
       it "redirects to the created user" do
-        User.stub!(:new).and_return(mock_user(:save => true))
-        post :create, :user => {}
-        response.should redirect_to(user_url(mock_user))
+        response.should redirect_to(user_path(assigns[:user]))
       end
     end
   
     describe "with invalid params" do
-      it "assigns a newly created but unsaved user as @user" do
-        User.stub!(:new).with({'these' => 'params'}).and_return(mock_user(:save => false))
-        post :create, :user => {:these => 'params'}
-        assigns[:user].should equal(mock_user)
+      before do
+        params = Factory.attributes_for :user, :email => "invalidemail"
+        post :create, :user => params
       end
-  
+      it "assigns a newly created, invalid, unsaved user as @user" do
+        assigns[:user].should_not be_nil
+        assigns[:user].should_not be_valid
+      end
       it "re-renders the 'new' template" do
-        User.stub!(:new).and_return(mock_user(:save => false))
-        post :create, :user => {}
         response.should render_template('new')
       end
     end
@@ -95,43 +95,38 @@ describe UsersController do
   end
   
   describe "PUT update" do
-  
+    before do
+      @user = Factory.create :user
+      login(@user)
+    end
     describe "with valid params" do
+      before do
+        put :update, :id => @user.id, :user => {:nickname => "bob"}
+      end
       it "updates the requested user" do
-        User.should_receive(:find).with("37").and_return(mock_user)
-        mock_user.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :user => {:these => 'params'}
+        @user.reload.nickname.should == "bob"
       end
-  
       it "assigns the requested user as @user" do
-        User.stub!(:find).and_return(mock_user(:update_attributes => true))
-        put :update, :id => "1"
-        assigns[:user].should equal(mock_user)
+        assigns[:user].should == @user
       end
-  
       it "redirects to the user" do
-        User.stub!(:find).and_return(mock_user(:update_attributes => true))
-        put :update, :id => "1"
-        response.should redirect_to(user_url(mock_user))
+        response.should redirect_to user_url(@user)
       end
     end
   
     describe "with invalid params" do
-      it "updates the requested user" do
-        User.should_receive(:find).with("37").and_return(mock_user)
-        mock_user.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, :id => "37", :user => {:these => 'params'}
+      before do
+        put :update, :id => @user.id, :user => {:nickname => "bob", :email => "invalidemail"}
       end
-  
+      it "does not update the requested user" do
+        @user.reload
+        @user.nickname.should_not == "bob"
+        @user.email.should_not == "invalidemail"
+      end
       it "assigns the user as @user" do
-        User.stub!(:find).and_return(mock_user(:update_attributes => false))
-        put :update, :id => "1"
-        assigns[:user].should equal(mock_user)
+        assigns[:user].should == @user
       end
-  
       it "re-renders the 'edit' template" do
-        User.stub!(:find).and_return(mock_user(:update_attributes => false))
-        put :update, :id => "1"
         response.should render_template('edit')
       end
     end

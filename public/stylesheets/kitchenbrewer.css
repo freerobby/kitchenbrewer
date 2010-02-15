@@ -13,7 +13,7 @@
 body {
   font: .8em Arial, Tahoma, Verdana;
   background: #fff url(../images/bg.gif) repeat-x;
-  color: #777;
+  color: #000;
 }
 
 a {
@@ -54,6 +54,19 @@ p {
   margin: 0 0 15px;
 }
 
+li {
+  margin-left: 30px;
+}
+ul {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.highlight_table {
+  border: 3px solid #A55;
+  padding: 17px;
+}
+
 #top {
   color: #ccc;
   padding: 6px 20px 0;
@@ -70,6 +83,12 @@ p {
 }
 .clear {
   clear: both;
+}
+
+.journal_entry {
+  border: 2px solid #ddd;
+  margin-bottom: 10px;
+  padding: 10px;
 }
 
 #pitch {
@@ -117,16 +136,40 @@ p {
 		}
 
 /* Customized Forms */
-.welcome_submit {
+.big_red_button {
   color: #fff;
   background: #b20f0f;
-  width: 160px;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
   height: 40px;
   font-size: 1.2em;
 }
-.welcome_password {
-  
+
+#brews_header {
+  padding-bottom: 20px;
 }
+
+#brews_table {
+  border: 1px solid #000;
+  width: 100%;
+  border-spacing: 0px;
+}
+  #brews_table thead tr {
+    height: 20px;
+    background-color: #ffffff;
+  }
+  #brews_table tbody tr {
+    height: 28px;
+  }
+  #brews_table tbody tr:hover {
+    background-color: #E8D66D;
+    cursor: pointer;
+  }
+  #brews_table td {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 
 #content {
   width: 970px;

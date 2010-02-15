@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
     config.disable_perishable_token_maintenance true
   end
   
+  has_many :brews
+  
   before_save :guess_nickname_if_blank
   before_save :unconfirm_email_if_email_changed
   after_save :request_confirmation_if_email_changed
@@ -10,10 +12,15 @@ class User < ActiveRecord::Base
   def confirm_email!
     self.update_attributes(:email_confirmed => true, :perishable_token => nil)
   end
-  
+
   private
   def guess_nickname_if_blank
-    self.nickname = self.email.gsub(/@.*/, "") if self.nickname.blank?
+    if self.nickname.blank?
+      self.nickname = self.email.gsub(/@.*/, "")
+      self.nickname.gsub!(/\..*/, "")
+      self.nickname.downcase!
+      self.nickname.capitalize!
+    end
   end
   
   def unconfirm_email_if_email_changed

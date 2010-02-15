@@ -1,0 +1,2 @@
+module BrewnotesHelper
+end

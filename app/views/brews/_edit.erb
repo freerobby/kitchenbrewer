@@ -1,0 +1,52 @@
+<h2>Update Brew Status</h2>
+
+<% form_for(@brew) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label "Recipe Title:" %>
+    <%= f.text_field :recipe_title %>
+  </p>
+  <p>
+    <table border="0">
+      <tr>
+        <td>
+          <%= f.label "Intended o.g.:" %>
+          <%= f.text_field :intended_original_gravity, :size => 5 %>
+        </td>
+        <td style="padding-left: 10px;">
+          <%= f.label "Intended f.g.:" %>
+          <%= f.text_field :intended_final_gravity, :size => 5 %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <%= f.label "Actual o.g.:" %>
+          <%= f.text_field :actual_original_gravity, :size => 5, :style => "float: right;" %>
+        </td>
+        <td style="padding-left: 10px;">
+          <%= f.label "Actual f.g.:" %>
+          <%= f.text_field :actual_final_gravity, :size => 5, :style => "float: right;" %>
+        </td>
+      </tr>
+    </table>
+  </p>
+  
+  <p>
+    <%= f.label "Began:" %>
+    <%= f.calendar_date_select :began_at, :style => "float: right;" %>
+  </p>
+  <p>
+    <%= f.label "Completed:" %>
+    <%= f.calendar_date_select :completed_at, :style => "float: right;" %>
+  </p>
+  
+  <p>
+    <div style="float: left;">
+      <%= f.submit "Save Changes" %>
+    </div>
+    <div style="float: right;">
+      <%= link_to 'Delete this Brew', @brew, :confirm => 'This will delete the entire journal for this brew. Are you sure?', :method => :delete %>
+    </div>
+  </p>
+<% end %>

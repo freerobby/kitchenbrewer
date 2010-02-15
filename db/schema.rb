@@ -9,9 +9,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100214040522) do
+ActiveRecord::Schema.define(:version => 20100214195313) do
+
+  create_table "brewnotes", :force => true do |t|
+    t.integer  "brew_id"
+    t.text     "body"
+    t.datetime "recorded_at"
+    t.decimal  "gravity",     :precision => 4, :scale => 3
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "brews", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "recipe_title"
+    t.decimal  "intended_original_gravity", :precision => 4, :scale => 3
+    t.decimal  "intended_final_gravity",    :precision => 4, :scale => 3
+    t.decimal  "actual_original_gravity",   :precision => 4, :scale => 3
+    t.decimal  "actual_final_gravity",      :precision => 4, :scale => 3
+    t.datetime "began_at"
+    t.datetime "completed_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "email"
     t.string   "crypted_password"
     t.string   "password_salt"

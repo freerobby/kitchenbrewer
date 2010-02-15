@@ -1,0 +1,16 @@
+<h2>New Note</h2>
+<% form_for @brewnote, :url => create_note_brew_path do |f| %>
+  <%= f.error_messages %>
+  
+  <p>
+    <%= f.label "Note:" %>
+    <%= f.text_area :body, :style => "width: 500px", :class => "mceEditor" %>
+  </p>
+  <div style="float: left; margin-bottom: 15px;">
+    <%= f.label "Gravity reading:" %>
+    <%= f.text_field :gravity, :size => 5 %>
+  </div>
+  <div style="float: right; margin-bottom: 15px;">
+    <%= f.submit "Create Note!", :class=>"big_red_button" %>
+  </div>
+<% end %>

@@ -1,0 +1,55 @@
+<% if @brews.count == 0 %>
+<h4>
+  Get Started!
+</h4>
+<div style="float: left; width: 50%">
+  <p>
+    You haven't started your beer journal yet. Give it a try the next time you brew!
+  </p>
+  <p>
+    Keeping a journal helps you to troubleshoot when things go wrong. And by doing it here, you can solicit help from other brewers when things don't go as planned.
+  </p>
+</div>
+<div class="highlight_table" style="float: right; margin-right: 70px; margin-bottom: 50px">
+  <%= render :partial => "new" %>
+</div>
+<% else %>
+  <!-- <div class="highlight_table" style="float: right; margin-right: 70px; margin-bottom: 50px"> -->
+  <div style="float: right;">
+    <%= render :partial => "new" %>
+  </div>
+  <table id="brews_table">
+  <thead>
+    <tr>
+      <th>Recipe</th>
+      <th>Began At</th>
+      <th>Completed At</th>
+      <th>o.g.</th>
+      <th>f.g.</th>
+    </tr>
+  </thead>
+  <tbody>  
+  <% @brews.each do |brew| %>
+    <% if brew.valid? %>
+    <tr onclick="javascript:location.href='<%= brew_path(brew) %>';">
+      <td align="center">
+        <%=h brew.recipe_title %>
+      </td>
+      <td align="center">
+        <%= brew.began_at.localtime.strftime("%a, %b %d, %Y") unless brew.began_at.nil? %>
+      </td>
+      <td align="center">
+        <%= brew.completed_at.localtime.strftime("%a, %b %d, %Y") unless brew.completed_at.nil? %>
+      </td>
+      <td align="center">
+        <%= brew.actual_original_gravity || "n/a" %>
+      </td>
+      <td align="center">
+        <%= brew.actual_final_gravity || "n/a" %>
+      </td>
+    </tr>
+    <% end %>
+  <% end %>
+  </tbody>
+  </table>
+<% end %>

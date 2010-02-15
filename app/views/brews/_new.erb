@@ -1,0 +1,18 @@
+<h1>New Brew</h1>
+<%
+  # Can't use @current_user.brews.build because it screws with @brews object.
+  if @brew.nil?
+    @brew = Brew.new
+    @brew.user = @current_user
+  end
+%>
+<% form_for(@brew) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label "Recipe Title:" %>
+    <%= f.text_field :recipe_title %>
+    <br />
+    <%= f.submit "Create Brew!", :class => "big_red_button" %>
+  </p>
+<% end %>

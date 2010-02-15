@@ -1,23 +1,18 @@
 class UsersController < ApplicationController
-  # before_filter :require_no_user, :only => [:new, :create]
-  # before_filter :require_user, :only => [:show, :edit, :update]
-
-  # GET /users/1
+  before_filter :require_no_user, :only => [:new, :create]
+  before_filter :require_user, :only => [:show, :edit, :update]
   def show
     @user = User.find(params[:id])
   end
-
-  # GET /users/new
+  
   def new
     @user = User.new
   end
-
-  # GET /users/1/edit
+  
   def edit
     @user = User.find(params[:id])
   end
-
-  # POST /users
+  
   def create
     @user = User.new(params[:user])
     if @user.save
@@ -27,10 +22,9 @@ class UsersController < ApplicationController
       render :action => :new
     end
   end
-
-  # PUT /users/1
+  
   def update
-    @user = User.find(params[:id])
+    @user = @current_user
     if @user.update_attributes(params[:user])
       flash[:notice] = 'Your profile has been updated.'
       redirect_to @user
@@ -39,9 +33,7 @@ class UsersController < ApplicationController
     end
   end
   
-  # GET /users/1/confirm
   def confirm
-    @user = User.find(params[:id])
     begin
       @user = User.find_using_perishable_token!(params[:token])
     rescue ActiveRecord::RecordNotFound

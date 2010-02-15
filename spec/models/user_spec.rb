@@ -7,8 +7,11 @@ describe User do
   
   describe "nickname" do
     it "defaults to pre-@ portion of email address if not provided" do
-      (Factory.create :user, :email => "user@domain.com", :nickname => nil).nickname.should == "user"
-      (Factory.create :user, :email => "user2@domain.com", :nickname => "").nickname.should == "user2"
+      (Factory.create :user, :email => "robby@freerobby.com", :nickname => nil).nickname.should == "Robby"
+      (Factory.create :user, :email => "USER2B@domain.com", :nickname => "").nickname.should == "User2b"
+    end
+    it "keeps only first name when guessing first.last@domain.com pattern" do
+      (Factory.create :user, :email => "john.smith@gmail.com", :nickname => nil).nickname.should == "John"
     end
     it "keeps specified nickname if provided" do
       (Factory.create :user, :email => "user@domain.com", :nickname => "Jeff").nickname.should == "Jeff"

@@ -2,24 +2,25 @@
 
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
-
-  <p>
-    <%= f.label "Email:" %>
-    <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label "Nickname:" %>
-    <%= f.text_field :nickname %>
-  </p>
-  <p>
-    <%= f.label "Password:" %>
-    <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.label "Confirm:" %>
-    <%= f.password_field :password_confirmation %>
-  </p>
-  <p>
-    <%= f.submit "Update Profile" %>
-  </p>
+  <table border="0">
+    <tr>
+      <td><%= f.label "Email:" %></td>
+      <td><%= f.text_field :email %></td>
+    </tr>
+    <tr>
+      <td><%= f.label "Nickname:" %></td>
+      <td><%= f.text_field :nickname %></td>
+    </tr>
+    <tr>
+      <td><%= f.label "Password:" %></td>
+      <td><%= f.password_field :password %></td>
+    </tr>
+    <tr>
+      <td><%= f.label "Confirm:" %></td>
+      <td><%= f.password_field :password_confirmation %></td>
+    </tr>
+    <tr>
+      <td colspan="2"><%= f.submit "Update Profile", :class => "big_red_button" %></td>
+    </tr>
+  </table>
 <% end %>

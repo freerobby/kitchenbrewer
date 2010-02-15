@@ -1,14 +1,14 @@
 <div id="pitch">
 	<h1>
-	  Homebrewing meets social media
+	  Tools for Homebrewers
 	</h1>
 	<p>
-	  KitchenBrewer is a resource for homebrewers. It integrates with social networks like Twitter and Facebook to help connect you with other brewers.
+	  KitchenBrewer helps you find and share recipes, get tips from fellow brewers, track your beer's progress, and post to Twitter and Facebook to tell the world about your brew.
 	</p>
   <% unless current_user %>
     <% form_for(User.new) do |f| %>
       <%= f.error_messages %>
-      <table style="border: 3px solid #A55; padding: 17px">
+      <table class="highlight_table" style="margin-top: -14px">
         <tr>
           <td>
             <%= f.label "Email:" %>
@@ -24,7 +24,7 @@
             </div>
           </td>
           <td>
-            <%= f.submit "1-click Sign Up!", :class => "welcome_submit" %>
+            <%= f.submit "1-click Sign Up!", :class => "big_red_button" %>
           </td>
         </tr>
       </table>
@@ -34,18 +34,18 @@
 <div class="third">
 	<h3>Log Your Progress</h3>
 	<p>
-	  Use our brewing journal to track your brew from boil to glass. 
+	  Our brewing journal tracks your brews from the brewpot into your glass. If you run into trouble, other members can look at what you did and provide feedback. 
 	</p>
 </div>
 <div class="third">
-	<h3>Share Your Recipes</h3>
+	<h3>Share Recipes</h3>
 	<p>
-	  Post your recipes for others to try.
+	  Post your favorite recipes for others, or try something other brewer's are raving about. You can tweak the recipes on our site and re-publish them for others to try.
 	</p>
 </div>
 <div class="third last">
 	<h3>Get Help</h3>
 	<p>
-	  Get help from other members when you have questions.
+	  Get help from other members when you have questions. We keep all your brewing data in one place, so there's no need to retype everything you did when you need to ask a question.
 	</p>
 </div>

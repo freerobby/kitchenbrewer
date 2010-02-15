@@ -1,6 +1,6 @@
 <div id="top">
   <% if current_user %>
-    Hi there, <%= link_to current_user.email, edit_user_path(current_user) %> | <%= link_to "Logout", logout_path %>
+    Happy brewing, <%= link_to ((current_user.nickname.nil?) ? current_user.email : current_user.nickname), edit_user_path(current_user) %> | <%= link_to "Logout", logout_path %>
   <% else %>
     <!-- You are not logged in. | -->
     

@@ -1,0 +1,34 @@
+<h1 style="margin-bottom: 15px;">
+  <%=h @brew.title %>
+</h1>
+<div style="float: right;">
+  <%= render :partial => "edit" %>
+</div>
+<div style="float: left; width: 500px;">
+  <% @brew.brewnotes.each do |note| %>
+    <div class="journal_entry">
+      <% if note.valid? %>
+      <p>
+        <div style="float: left;">
+          <% if !note.recorded_at.nil? %>
+            <%= "<em>On " + note.recorded_at.localtime.strftime("%a, %b %d, %Y") + ", you wrote: </em>"%>
+          <% end %>
+        </div>
+        <div style="float: right;">
+          <% if !note.gravity.nil? %>
+            <%= "Gravity reading: #{note.gravity}" %>
+          <% end %>
+        </div>
+      </p>
+      <p><%= note.body %></p>
+      <p>
+        <div style="float: right;">
+        <%= link_to "Edit", edit_brewnote_path(note) %> |
+        <%= link_to 'Delete', note, :confirm => 'This will permanently delete this note. Are you sure?', :method => :delete %>
+        </div>
+      </p>
+      <% end %>
+    </div>
+  <% end %>
+  <%= render :partial => "new_brewnote" %>
+</div>
