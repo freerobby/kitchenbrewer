@@ -8,6 +8,8 @@ class Brewnote < ActiveRecord::Base
   
   before_validation :set_recorded_at_if_unset
   
+  default_scope :order => "recorded_at ASC"
+  
   private
   def set_recorded_at_if_unset
     self.recorded_at = Time.now if self.recorded_at.nil?
