@@ -34,11 +34,15 @@
   
   <p>
     <%= f.label "Began:" %>
-    <%= f.calendar_date_select :began_at, :style => "float: right;" %>
+    <%= calendar_date_select_tag "brew[began_at]",
+      (@brew.began_at.nil?) ? "" : @brew.began_at.localtime,
+      :time => true, :size => 35, :popup => :force %>
   </p>
   <p>
     <%= f.label "Completed:" %>
-    <%= f.calendar_date_select :completed_at, :style => "float: right;" %>
+    <%= calendar_date_select_tag "brew[completed_at]",
+      (@brew.completed_at.nil?) ? "" : @brew.completed_at.localtime,
+      :time => true, :size => 35, :popup => :force %>
   </p>
   
   <p>

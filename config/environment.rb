@@ -14,3 +14,10 @@ Rails::Initializer.run do |config|
   config.time_zone = 'UTC'
 end
 
+CalendarDateSelect::FORMATS[:american_with_timezone] = {
+  :date => "%m/%d/%Y",
+  :time => " %I:%M %p %z",
+  :javascript_include => "format_american_with_timezone"
+}
+
+CalendarDateSelect.format = :american_with_timezone
