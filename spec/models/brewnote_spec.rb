@@ -23,4 +23,17 @@ describe Brewnote do
       f.recorded_at.should be_close(f.created_at, 1.second)
     end
   end
+  
+  describe "gravity" do
+    it "defines actual o.g. of brew when undefined" do
+      @brew.update_attribute(:actual_original_gravity, nil)
+      Factory.create :brewnote, :brew => @brew, :gravity => 1.025
+      @brew.reload.actual_original_gravity.should == 1.025
+    end
+    it "does not touch actual o.g. of brew when already defined" do
+      @brew.update_attribute(:actual_original_gravity, 1.505)
+      Factory.create :brewnote, :brew => @brew, :gravity => 1.025
+      @brew.reload.actual_original_gravity.should == 1.505
+    end
+  end
 end
