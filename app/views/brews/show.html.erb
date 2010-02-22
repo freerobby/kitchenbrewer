@@ -6,7 +6,7 @@
 </div>
 <div style="float: left; width: 500px;">
   <% @brew.brewnotes.each do |note| %>
-    <div class="journal_entry">
+    <div id="entry_<%= note.id %>" class="journal_entry">
       <% if note.valid? %>
       <p>
         <div style="float: left;">
@@ -24,7 +24,7 @@
       <p>
         <div style="float: right;">
         <%= link_to "Edit", edit_brewnote_path(note) %> |
-        <%= link_to 'Delete', note, :confirm => 'This will permanently delete this note. Are you sure?', :method => :delete %>
+        <%= link_to_remote 'Delete', :url => brewnote_path(note), :confirm => 'This will permanently delete this note. Are you sure?', :method => :delete, :update => "entry_#{note.id}" %>
         </div>
       </p>
       <% end %>

@@ -18,7 +18,10 @@ class BrewnotesController < ApplicationController
   def destroy
     brew = @brewnote.brew
     @brewnote.destroy
-    redirect_to brew_path(brew)
+    respond_to do |format|
+      format.html {redirect_to brew_path(brew)}
+      format.js {render :text => "<p>This entry has been deleted.</p>"}
+    end
   end
   
   private
