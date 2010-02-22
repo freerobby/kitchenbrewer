@@ -36,10 +36,11 @@ class BrewsController < ApplicationController
 
   def update
     if @brew.update_attributes(params[:brew])
-      flash[:notice] = 'Your brew has been updated.'
-      redirect_to @brew
-    else
-      render :action => :edit
+      @msg = 'Your brew has been updated.'
+    end
+    respond_to do |format|
+      format.html {render :action => :edit}
+      format.js {render :partial => "edit"}
     end
   end
   

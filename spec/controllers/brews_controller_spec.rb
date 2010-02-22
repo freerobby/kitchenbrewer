@@ -105,7 +105,7 @@ describe BrewsController do
         assigns[:brew].should == @brew
       end
       it "redirects to the brew" do
-        response.should redirect_to brew_url(@brew)
+        response.should render_template("edit")
       end
     end
   

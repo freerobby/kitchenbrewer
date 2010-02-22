@@ -1,6 +1,7 @@
+<div id="update_brew_status_form">
 <h2>Update Brew Status</h2>
 
-<% form_for(@brew) do |f| %>
+<% remote_form_for(@brew, :update => "update_brew_status_form") do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -47,10 +48,14 @@
   
   <p>
     <div style="float: left;">
-      <%= f.submit "Save Changes" %>
+      <%= f.submit "Save Changes", :onmousedown => "javascript:$('msg').hide();"%>
     </div>
     <div style="float: right;">
       <%= link_to 'Delete this Brew', @brew, :confirm => 'This will delete the entire journal for this brew. Are you sure?', :method => :delete %>
     </div>
   </p>
+  <p id="msg" style="color: green">
+    <%= @msg %>
+  </p>
 <% end %>
+</div>
