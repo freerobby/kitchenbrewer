@@ -22,12 +22,12 @@ a {
 }
 
 h1 {
-  font-size: 1.4em;
+  font-size: 1.6em;
   font-weight: normal;
+  margin-bottom: 15px;
 }
 	h1 a {
 	  color: #fff;
-	  font-size: 1.6em;
 	}
 h2 {
   font-size: 1.2em;
@@ -45,7 +45,7 @@ h4 {
   margin: 0 0 15px;
   color: #555;
   font-weight: normal;
-  font-size: 1.6em;
+  font-size: 1.3em;
   font-weight: normal;
 }
 p {

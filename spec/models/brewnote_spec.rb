@@ -14,6 +14,9 @@ describe Brewnote do
       lambda {
         Factory.create :brewnote, :body => nil, :brew => @brew
       }.should raise_error ActiveRecord::RecordInvalid
+      lambda {
+        Factory.create :brewnote, :body => "", :brew => @brew
+      }.should raise_error ActiveRecord::RecordInvalid
     end
   end
   

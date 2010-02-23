@@ -11,6 +11,9 @@ Rails::Initializer.run do |config|
   config.gem "calendar_date_select", :source => "http://gemcutter.org"
   config.gem 'hoptoad_notifier'
   config.gem "kete-tiny_mce", :lib => "tiny_mce", :source => "http://gems.github.com"
+  config.gem "searchlogic", :source => "http://gemcutter.org"
+  config.gem "will_paginate", :source => "http://gemcutter.org"
+  config.gem "repeated_auto_complete", :source => "http://gemcutter.org"
   
   config.time_zone = 'UTC'
 end

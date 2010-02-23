@@ -9,7 +9,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100214195313) do
+ActiveRecord::Schema.define(:version => 20100221220743) do
+
+  create_table "brew_types", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "brewnotes", :force => true do |t|
     t.integer  "brew_id"
@@ -29,6 +35,59 @@ ActiveRecord::Schema.define(:version => 20100214195313) do
     t.decimal  "actual_final_gravity",      :precision => 4, :scale => 3
     t.datetime "began_at"
     t.datetime "completed_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "categories", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ingredients", :force => true do |t|
+    t.string   "title"
+    t.integer  "default_unit_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "category_id"
+  end
+
+  create_table "recipe_ingredients", :force => true do |t|
+    t.integer  "recipe_id"
+    t.integer  "ingredient_id"
+    t.integer  "unit_id"
+    t.float    "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "recipes", :force => true do |t|
+    t.integer  "tweak_of_id"
+    t.string   "title"
+    t.decimal  "original_gravity",  :precision => 4, :scale => 3
+    t.decimal  "final_gravity",     :precision => 4, :scale => 3
+    t.integer  "volume_in_gallons"
+    t.integer  "style_id"
+    t.integer  "ibus"
+    t.decimal  "abv",               :precision => 4, :scale => 3
+    t.integer  "srm"
+    t.text     "instructions"
+    t.integer  "author_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "brew_type_id"
+  end
+
+  create_table "styles", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "units", :force => true do |t|
+    t.string   "title"
+    t.string   "abbreviation"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

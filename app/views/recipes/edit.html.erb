@@ -1,0 +1,68 @@
+<h1>Edit Recipe</h1>
+
+<% form_for(@recipe) do |f| %>
+  <%= f.error_messages %>
+  <div style="float: left;">
+    <p>
+      <%= f.label :title, "Title:" %>
+      <%= f.text_field :title %>
+    </p>
+    <p>
+      <%= f.label :style_title, "Style:" %>
+      <%= f.text_field_with_auto_complete :style_title, {}, {:url => styles_path(:js), :method => :get, :with => "'search=' + element.value"} %>
+    </p>
+    <p>
+      <%= f.label :brew_type_id, "Brew type:" %>
+      <%= f.select :brew_type_id, BrewType.all.collect {|bt| [bt.title, bt.id]} %>
+    </p>
+    <p>
+      <%= f.label :volume_in_gallons, "Batch size:" %>
+      <%= f.text_field :volume_in_gallons, :size => 1, :value => "5" %> gallons
+    </p>
+    <p>
+      <%= f.label :original_gravity, "Original gravity:" %>
+      <%= f.text_field :original_gravity, :size => 5 %>
+    </p>
+    <p>
+      <%= f.label :final_gravity, "Final gravity:" %>
+      <%= f.text_field :final_gravity, :size => 5 %>
+    </p>
+    <p>
+      <%= f.label :ibus, "IBUs" %>
+      <%= f.text_field :ibus, :size => 5 %>
+    </p>
+    <p>
+      <%= f.label :abv, "ABV:" %>
+      <%= f.text_field :abv, :size => 3 %>%
+    </p>
+    <p>
+      <%= f.label :srm, "SRM:" %>
+      <%= f.text_field :srm, :size => 3 %>
+    </p>
+    <p>
+      <%= f.submit "Save Recipe!", :class => "big_red_button" %>
+    </p>
+  </div>
+  <div style="float: right;">
+    <h4>Ingredients</h4>
+    <ul>
+      <% f.fields_for :recipe_ingredients do |ri| %>
+        <li>
+          <%= ri.text_field :quantity, :size => 3 %>
+          <%= ri.collection_select :unit_id, Unit.all, :id, :title %>
+          <%= ri.text_field_with_auto_complete :ingredient_title, {}, {:url => ingredients_path(:js), :method => :get, :with => "'search=' + element.value"} %>
+          <% unless ri.object.new_record? %>
+            <%= ri.check_box :_destroy %>
+            <%= ri.label :_destroy, "Remove" %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+    
+    <%= "<br /><br /><br />" if @recipe.recipe_ingredients.count == 0 %>
+    <h4>Instructions</h4>
+    <p>
+      <%= f.text_area :instructions, :style => "width: 500px", :class => "mceEditor" %>
+    </p>
+  </div>
+<% end %>

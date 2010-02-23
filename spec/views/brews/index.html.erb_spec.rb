@@ -12,15 +12,24 @@ describe "/brews/index.html.erb" do
       response.should include_text "Get Started"
     end
     it "renders new brew form" do
+      render
+      response.should have_tag("input[name=?]", "brew[recipe_title]")
     end
   end
   describe "with at least one brew" do
     before do
-      assigns[:brews] = [Factory.build :brew]
+      b1 = Factory.create :brew, :recipe_title => "Stout"
+      b2 = Factory.create :brew, :recipe_title => "Porter"
+      assigns[:brews] = [b1, b2]
     end
     it "lists existing brews" do
+      render
+      response.should include_text "Stout"
+      response.should include_text "Porter"
     end
     it "renders new brew form" do
+      render
+      response.should have_tag("input[name=?]", "brew[recipe_title]")
     end
   end
 end

@@ -1,0 +1,56 @@
+<div style="float: right;">
+  <% if @recipe.author_id == current_user.id %>
+    <%= link_to "[Edit Recipe]", edit_recipe_path(@recipe) %>
+  <% elsif !current_user.nil? %>
+    <%= link_to "[Tweak Recipe]", "#" %>
+  <% end %>
+</div>
+<h1 style="margin-bottom: 15px;">
+  <%=h @recipe.title %>
+</h1>
+<div style="float: left; width: 500px;">
+  <h2>
+    Ingredients
+  </h2>
+  <ul>
+    <% @recipe.recipe_ingredients.each do |ri| %>
+      <li>
+      <%= ri.quantity %>
+      <%= ri.unit.abbreviation %>
+      <%= ri.ingredient.title %>
+      </li>
+    <% end %>
+  </ul>
+  <h2>
+    Instructions
+  </h2>
+  <%= @recipe.instructions %>
+</div>
+<div style="float: right; width: 300px;">
+  <p>
+    Author: <%= link_to @recipe.author.nickname, user_path(@recipe.author) %>
+  <p>
+    Style: <%= @recipe.style.title %>
+  </p>
+  <p>
+    Type: <%= @recipe.brew_type.title %>
+  </p>
+  <p>
+    o.g.: <%= @recipe.original_gravity %>
+  </p>
+  <p>
+    f.g.: <%= @recipe.final_gravity %>
+  </p>
+  <p>
+    batch size: <%= @recipe.volume_in_gallons %> gallons
+  </p>
+  <p>
+    IBUs: <%= @recipe.ibus %>
+  </p>
+  <p>
+    ABV: <%= @recipe.abv %>%
+  </p>
+  <p>
+    SRM: <%= @recipe.srm %>
+  </p>
+</div>

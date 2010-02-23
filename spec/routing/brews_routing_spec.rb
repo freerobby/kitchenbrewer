@@ -14,7 +14,7 @@ describe BrewsController do
       { :get => "/brews/1" }.should route_to(:controller => "brews", :action => "show", :id => "1")
     end
 
-    it "neithr recognizes nor generates #edit" do
+    it "neither recognizes nor generates #edit" do
       { :get => "/brews/1/edit" }.should_not be_routeable
     end
 

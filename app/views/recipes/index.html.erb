@@ -1,0 +1,48 @@
+<!-- <div class="highlight_table" style="float: right; margin-right: 70px; margin-bottom: 50px"> -->
+<div style="float: right;">
+  <%= link_to "New Recipe", new_recipe_path %>
+</div>
+<table id="brews_table">
+<thead>
+  <tr>
+    <th>Style</th>
+    <th>Title</th>
+    <th>o.g.</th>
+    <th>f.g.</th>
+    <th>IBUs</th>
+    <th>ABV</th>
+    <th>Author</th>
+    <th>Type</th>
+  </tr>
+</thead>
+<tbody>  
+<% @recipes.each do |recipe| %>
+  <tr onclick="javascript:location.href='<%= recipe_path(recipe) %>';">
+    <td align="center">
+      <%=h recipe.style.title %>
+    </td>
+    <td align="center">
+      <%= recipe.title %>
+    </td>
+    <td align="center">
+      <%= recipe.original_gravity %>
+    </td>
+    <td align="center">
+      <%= recipe.final_gravity %>
+    </td>
+    <td align="center">
+      <%= recipe.ibus %>
+    </td>
+    <td align="center">
+      <%= recipe.abv %>
+    </td>
+    <td align="center">
+      <%= recipe.author.nickname %>
+    </td>
+    <td align="center">
+      <%= recipe.brew_type.title %>
+    </td>
+  </tr>
+<% end %>
+</tbody>
+</table>

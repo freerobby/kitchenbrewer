@@ -2,6 +2,6 @@
   <% if current_user %>
   <li><%= link_to_unless_current "Welcome", root_path %></li>
   <li><%= link_to_unless_current "Journal", brews_path %></li>
-	<li><a href="#">Recipes</a></li>
+	<li><%= link_to_unless_current "Recipes", recipes_path %></li>
 	<% end %>
 </ul>

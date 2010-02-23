@@ -1,0 +1,48 @@
+<h1>New recipe</h1>
+
+<% form_for(@recipe) do |f| %>
+  <%= f.error_messages %>
+  <div style="float: left;">
+    <h3>Required Fields</h3>
+    <p>
+      <%= f.label :title, "Title:" %>
+      <%= f.text_field :title %>
+    </p>
+    <p>
+      <%= f.label :style_id, "Style:" %>
+      <%= f.text_field_with_auto_complete :style_title, {}, {:url => styles_path(:js), :method => :get, :with => "'search=' + element.value"} %>
+    </p>
+    <p>
+      <%= f.label :brew_type_id, "Brew type:" %>
+      <%= f.collection_select :brew_type_id, BrewType.all, :id, :title %>
+    </p>
+    <p>
+      <%= f.label :volume_in_gallons, "Batch size:" %>
+      <%= f.text_field :volume_in_gallons, :size => 1, :value => "5" %> gallons
+    </p>
+    <h3>Optional Fields</h3>
+    <p>
+      <%= f.label :original_gravity, "Original gravity:" %>
+      <%= f.text_field :original_gravity, :size => 5 %>
+    </p>
+    <p>
+      <%= f.label :final_gravity, "Final gravity:" %>
+      <%= f.text_field :final_gravity, :size => 5 %>
+    </p>
+    <p>
+      <%= f.label :ibus, "IBUs" %>
+      <%= f.text_field :ibus, :size => 5 %>
+    </p>
+    <p>
+      <%= f.label :abv, "ABV:" %>
+      <%= f.text_field :abv, :size => 3 %>%
+    </p>
+    <p>
+      <%= f.label :srm, "SRM:" %>
+      <%= f.text_field :srm, :size => 3 %>
+    </p>
+    <p>
+      <%= f.submit "Save Recipe!", :class => "big_red_button" %>
+    </p>
+  </div>
+<% end %>

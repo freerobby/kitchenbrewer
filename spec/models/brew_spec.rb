@@ -7,8 +7,8 @@ describe Brew do
         Factory.create :brew, :recipe_title => nil
       }.should raise_error ActiveRecord::RecordInvalid
       lambda {
-        Factory.create :brew, :recipe_title => "It's a title!"
-      }.should_not raise_error
+        Factory.create :brew, :recipe_title => ""
+      }.should raise_error ActiveRecord::RecordInvalid
     end
   end
   

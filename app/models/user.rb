@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   end
   
   has_many :brews
+  has_many :recipes
   
   before_save :guess_nickname_if_blank
   before_save :unconfirm_email_if_email_changed
@@ -18,6 +19,7 @@ class User < ActiveRecord::Base
     if self.nickname.blank?
       self.nickname = self.email.gsub(/@.*/, "")
       self.nickname.gsub!(/\..*/, "")
+      self.nickname.gsub!(/\d+.*/, "")
       self.nickname.downcase!
       self.nickname.capitalize!
     end
