@@ -9,6 +9,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 Rails::Initializer.run do |config|
   config.gem "authlogic", :source => "http://gemcutter.org"
   config.gem "calendar_date_select", :source => "http://gemcutter.org"
+  config.gem 'hoptoad_notifier'
   config.gem "kete-tiny_mce", :lib => "tiny_mce", :source => "http://gems.github.com"
   
   config.time_zone = 'UTC'
