@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
-  before_filter :require_no_user, :only => [:new, :create]
-  before_filter :require_user, :only => [:show, :edit, :update]
+  before_filter :load_user, :only => [:show, :edit, :update]
+  access_control do
+    allow anonymous, :to => [:show, :new, :create, :confirm]
+    allow logged_in, :to => [:show, :confirm]
+    allow :owner, :of => :user, :to => [:edit, :update]
+  end
+  
   def show
     @user = User.find(params[:id])
   end
@@ -10,7 +15,7 @@ class UsersController < ApplicationController
   end
   
   def edit
-    @user = User.find(params[:id])
+    @user = current_user
   end
   
   def create
@@ -24,7 +29,7 @@ class UsersController < ApplicationController
   end
   
   def update
-    @user = @current_user
+    @user = current_user
     if @user.update_attributes(params[:user])
       flash[:notice] = 'Your profile has been updated.'
       redirect_to @user
@@ -52,5 +57,10 @@ class UsersController < ApplicationController
       redirect_to '/'
       return
     end
+  end
+  
+  private
+  def load_user
+    @user = User.find(params[:id])
   end
 end

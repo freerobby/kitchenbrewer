@@ -1,0 +1,14 @@
+<p>
+  Intended o.g.: <%= @brew.intended_original_gravity %><br />
+  Actual o.g.: <%= @brew.actual_original_gravity %>
+</p>
+<p>
+  Intended f.g.: <%= @brew.intended_final_gravity %><br />
+  Actual f.g.: <%= @brew.actual_final_gravity %>
+</p>
+<p>
+  Began: <%= @brew.began_at.localtime.strftime("%a, %b %d, %Y") unless @brew.began_at.nil? %>
+</p>
+<p>
+  Completed: <%= @brew.completed_at.localtime.strftime("%a, %b %d, %Y") unless @brew.completed_at.nil? %>
+</p>

@@ -6,6 +6,9 @@ require 'spec/autorun'
 require 'spec/rails'
 require 'authlogic/test_case'
 
+RESPONSE_UNAUTHORIZED = 401
+RESPONSE_REDIRECT = 302
+
 # Uncomment the next line to use webrat's matchers
 #require 'webrat/integrations/rspec-rails'
 
@@ -14,13 +17,6 @@ require 'authlogic/test_case'
 Dir[File.expand_path(File.join(File.dirname(__FILE__),'support','**','*.rb'))].each {|f| require f}
 
 Spec::Runner.configure do |config|
-  # If you're not using ActiveRecord you should remove these
-  # lines, delete config/database.yml and disable :active_record
-  # in your config/boot.rb
-  config.use_transactional_fixtures = true
-  config.use_instantiated_fixtures  = false
-  config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
-  
 end
 
 def fake_login(user)
@@ -28,6 +24,7 @@ def fake_login(user)
 end
 
 def login(user)
+  logout
   UserSession.create(user)
 end
 

@@ -2,7 +2,12 @@
   <%=h @brew.title %>
 </h1>
 <div style="float: right;">
-  <%= render :partial => "edit" %>
+  <% show_to :owner, :of => @brew do %>
+    <%= render :partial => "edit" %>
+  <% end %>
+  <% show_to :nonowner, :of => @brew do %>
+    <%= render :partial => "status" %>
+  <% end %>
 </div>
 <div style="float: left; width: 500px;">
   <% @brew.brewnotes.each do |note| %>
@@ -11,7 +16,7 @@
       <p>
         <div style="float: left;">
           <% if !note.recorded_at.nil? %>
-            <%= "<em>On " + note.recorded_at.localtime.strftime("%a, %b %d, %Y") + ", you wrote: </em>"%>
+            <%= "<em>On " + note.recorded_at.localtime.strftime("%a, %b %d, %Y") + ", #{@brew.user.nickname} wrote: </em>"%>
           <% end %>
         </div>
         <div style="float: right;">
@@ -22,13 +27,17 @@
       </p>
       <p><%= note.body %></p>
       <p>
-        <div style="float: right;">
-        <%= link_to "Edit", edit_brewnote_path(note) %> |
-        <%= link_to_remote 'Delete', :url => brewnote_path(note), :confirm => 'This will permanently delete this note. Are you sure?', :method => :delete, :update => "entry_#{note.id}" %>
-        </div>
+        <% show_to :owner, :of => @brew do %>
+          <div style="float: right;">
+            <%= link_to "Edit", edit_brewnote_path(note) %> |
+            <%= link_to_remote 'Delete', :url => brewnote_path(note), :confirm => 'This will permanently delete this note. Are you sure?', :method => :delete, :update => "entry_#{note.id}" %>
+          </div>
+        <% end %>
       </p>
       <% end %>
     </div>
   <% end %>
-  <%= render :partial => "new_brewnote" %>
+  <% show_to :owner, :of => @brew do %>
+    <%= render :partial => "new_brewnote" %>
+  <% end %>
 </div>

@@ -7,13 +7,14 @@ RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
+  config.gem "acl9"
   config.gem "authlogic", :source => "http://gemcutter.org"
   config.gem "calendar_date_select", :source => "http://gemcutter.org"
   config.gem 'hoptoad_notifier'
   config.gem "kete-tiny_mce", :lib => "tiny_mce", :source => "http://gems.github.com"
+  config.gem "repeated_auto_complete", :source => "http://gemcutter.org"
   config.gem "searchlogic", :source => "http://gemcutter.org"
   config.gem "will_paginate", :source => "http://gemcutter.org"
-  config.gem "repeated_auto_complete", :source => "http://gemcutter.org"
   
   config.time_zone = 'UTC'
 end

@@ -1,8 +1,11 @@
 class BrewsController < ApplicationController
+  before_filter :load_brew, :only => [:show, :update, :destroy, :create_note]
+  access_control do
+    allow anonymous, :to => [:show]
+    allow logged_in, :to => [:index, :show, :create]
+    allow :owner, :of => :brew, :to => [:update, :create_note, :destroy]
+  end
   uses_tiny_mce
-  
-  before_filter :require_user
-  before_filter :get_brew, :only => [:show, :update, :destroy, :create_note, :destroy_note]
   
   def index
     @brews = @current_user.brews
@@ -50,7 +53,7 @@ class BrewsController < ApplicationController
   end
   
   private
-  def get_brew
-    @brew = @current_user.brews.find(params[:id])
+  def load_brew
+    @brew = Brew.find(params[:id])
   end
 end

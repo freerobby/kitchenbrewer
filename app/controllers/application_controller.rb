@@ -5,7 +5,13 @@ class ApplicationController < ActionController::Base
   before_filter :basic_authenticate if RAILS_ENV == "production"
   filter_parameter_logging :password, :password_confirmation
   
+  rescue_from Acl9::AccessDenied, :with => :deny_access
+  
   private
+  def deny_access
+    render :file => "#{Rails.public_path}/401.html", :status => :unauthorized
+  end
+  
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find

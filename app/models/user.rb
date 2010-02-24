@@ -13,10 +13,27 @@ class User < ActiveRecord::Base
   def confirm_email!
     self.update_attributes(:email_confirmed => true, :perishable_token => nil)
   end
+  
+  def has_role?(role, object)
+    if role == :owner || role == :owner.to_s
+      if object.class.name == "User"
+        return self.id == object.id
+      elsif object.class.name == "Recipe"
+        return self.id == object.author_id
+      elsif object.class.name == "Brew"
+        return self.id == object.user_id
+      elsif object.class.name == "Brewnote"
+        return self.id == object.brew.user_id
+      end
+    elsif role == :nonowner || role == :nonowner.to_s
+      return !has_role?(:owner, object)
+    end
+    false
+  end
 
   private
   def guess_nickname_if_blank
-    if self.nickname.blank?
+    if self.nickname.blank? && !self.email.blank?
       self.nickname = self.email.gsub(/@.*/, "")
       self.nickname.gsub!(/\..*/, "")
       self.nickname.gsub!(/\d+.*/, "")

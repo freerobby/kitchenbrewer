@@ -1,5 +1,7 @@
+acl9
 authlogic
 calendar_date_select
+hoptoad_notifier
 kete-tiny_mce --source gems.github.com
 repeated_auto_complete
 searchlogic

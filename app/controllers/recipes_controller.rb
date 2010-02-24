@@ -1,7 +1,11 @@
 class RecipesController < ApplicationController
-  uses_tiny_mce
   before_filter :load_recipe, :only => [:show, :edit, :update, :destroy]
-  before_filter :require_user, :only => [:new, :create, :edit, :update, :destroy]
+  access_control do
+    allow anonymous, :to => [:index, :show]
+    allow logged_in, :to => [:index, :show, :new, :create]
+    allow :owner, :of => :recipe, :to => [:edit, :update, :destroy]
+  end
+  uses_tiny_mce
   
   def index
     @search = Recipe.search(params[:search])

@@ -5,6 +5,74 @@ describe User do
     Factory.create :user
   end
   
+  it "requires email address" do
+    lambda {
+      Factory.create :user, :email => nil
+    }.should raise_error ActiveRecord::RecordInvalid
+  end
+  
+  describe "has_role?" do
+    describe "ownership" do
+      describe "nonowner" do
+        before do
+          @u1 = Factory.create :user
+          @u2 = Factory.create :user
+        end
+        it "owner is non-nonowner" do
+          @u1.has_role?(:nonowner, @u1).should == false
+        end
+        it "non-owner is nonowner" do
+          @u2.has_role?(:nonowner, @u1).should == true
+        end
+      end
+      describe "user" do
+        before do
+          @u1 = Factory.create :user
+          @u2 = Factory.create :user
+        end
+        it "owns self" do
+          @u1.has_role?(:owner, @u1).should == true
+        end
+        it "does not own others" do
+          @u1.has_role?(:owner, @u2).should == false
+        end
+      end
+      describe "recipe" do
+        before do
+          @u1 = Factory.create :user
+          @u2 = Factory.create :user
+          @recipe = Factory.create :recipe, :author => @u1
+        end
+        it "owner owns" do
+          @u1.has_role?(:owner, @recipe).should == true
+        end
+        it "non-owner does not own" do
+          @u2.has_role?(:owner, @recipe).should == false
+        end
+      end
+      describe "brew and brewnotes" do
+        before do
+          @u1 = Factory.create :user
+          @u2 = Factory.create :user
+          @brew = Factory.create :brew, :user => @u1
+          @brewnote = Factory.create :brewnote, :brew => @brew
+        end
+        it "owner owns brew" do
+          @u1.has_role?(:owner, @brew).should == true
+        end
+        it "non-owner does not own brew" do
+          @u2.has_role?(:owner, @brew).should == false
+        end
+        it "owner of brew owns brewnote" do
+          @u1.has_role?(:owner, @brewnote).should == true
+        end
+        it "non-owner of brew does not own brewnote" do
+          @u2.has_role?(:owner, @brewnote).should == false
+        end
+      end
+    end
+  end
+  
   describe "nickname" do
     it "defaults to pre-@ portion of email address if not provided" do
       (Factory.create :user, :email => "robby@freerobby.com", :nickname => nil).nickname.should == "Robby"

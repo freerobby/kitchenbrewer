@@ -1,7 +1,9 @@
 class BrewnotesController < ApplicationController
+  before_filter :load_brewnote, :only => [:edit, :update, :destroy]
+  access_control do
+    allow :owner, :of => :brewnote, :to => [:edit, :update, :destroy]
+  end
   uses_tiny_mce
-  before_filter :require_user
-  before_filter :get_brewnote
   
   def edit
   end
@@ -25,8 +27,7 @@ class BrewnotesController < ApplicationController
   end
   
   private
-  def get_brewnote
-    b = Brewnote.find(params[:id])
-    @brewnote = b if b.brew.user == @current_user
+  def load_brewnote
+    @brewnote = Brewnote.find(params[:id])
   end
 end
