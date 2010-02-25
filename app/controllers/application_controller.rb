@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   helper :all
   helper_method :current_user
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  before_filter :basic_authenticate if RAILS_ENV == "production"
   filter_parameter_logging :password, :password_confirmation
   
   rescue_from Acl9::AccessDenied, :with => :deny_access
@@ -42,12 +41,5 @@ class ApplicationController < ActionController::Base
 
   def store_location
     session[:return_to] = request.request_uri
-  end
-
-  def basic_authenticate
-    # Given this username, return the cleartext password (or nil if not found)
-    authenticate_or_request_with_http_basic("KitchenBrewer") do |username, password|
-      username == "robby" && password == "robby"
-    end
   end
 end
